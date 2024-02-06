@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        button {
+            transition: all 0.5s;
+        }
+
+        .clicked {
+            background: red;
+        }
+
+        .clicked.correct{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>My quiz!</h1>
+    <div class = "question">
+        <h2>How you should NOT refer to JavaScript?</h2>
+        <button>Vanilla JS</button>
+        <button>JS</button>
+        <button class="correct">Java</button>
+    </div>
+    <div class = "question">
+        <h2>Q2</h2>
+        <button>Vanilla JS</button>
+        <button>JS</button>
+        <button class="correct">Java</button>
+    </div>
+
+    <p>Score: <span class="scoreElement">0</span></p>
+    
+
+
+    <script>
+        // global variables
+        let question;
+        let score = 0;
+        let scoreElement = document.querySelector(".scoreElement");
+
+        //selected all buttons, this is a global variable
+        let myButtons = document.querySelectorAll("button");
+
+        for(button of myButtons){
+
+            button.onclick = checkAnswer;
+
+        }
+
+        function checkAnswer(event){
+            // the argument in this function is the event
+            let button = event.target;
+            question = button.parentElement;
+            if (button.classList.contains("correct")){
+                //button.style.background = 'green';
+                button.classList.add("clicked");
+                score++;
+                scoreElement.innerText = score;
+            } else {
+                //button.style.background = 'red';
+                button.classList.add("clicked");
+                score -=1;
+                scoreElement.innerText = score;
+            }
+
+            disableButtons();
+        }
+
+        function disableButtons(){
+
+            let currentButtons = question.querySelectorAll('button');
+            for(let button of currentButtons){
+                // runs through every button in the global "myButtons" variable and then turns it off by setting disabled to true
+
+                button.disabled = true;
+
+            }
+
+        }
+
+        
+
+    </script>
+
+
+
+    <!--Inline JS-->
+    <!--<button onclick="alert('Hello?')">
+        Do Something
+    </button> -->
+
+    <!--<button>
+        Do Something
+    </button> -->
+
+    <!--<script>
+        // to create a variable set equal to every button
+        // let makes it public, this goes through the doc and finds the first button
+        let button = document.querySelector('button');
+        
+        //When button is clicked
+        button.addEventListener('click', function(){
+            alert("YAY YOU CLICKED IT!");
+        });
+        // note: you can create the function elsewhere and call to it in the listener
+
+        function newFunc(){
+            // this is where you put the code for this function
+        }
+
+
+        // this shows up in the console of the inspector
+        // console.log(button);
+
+    </script> -->
+</body>
+</html>
